@@ -3,25 +3,56 @@
 <html>
 <head>
     <title>Playground</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        .h1Color:hover {
+            color: #02C8A7;
+        }
+
+        .fa {
+            font-size: 200px;
+            color: pink;
+        }
+
+        .group {
+            width: 100%;
+            display: block;
+        }
+
+        ul li {
+            list-style-type: square;
+        }
+
+        ol li {
+            list-style-type: upper-latin;
+            color: #670A0A;
+            background-color: teal;
+        }
+    </style>
 </head>
 <body>
-    <h1>This is a header</h1>
+    <div class="container">
+    <h1 class="h1Color">This is a header</h1>
     <h6>This is the smallest healder</h6>
     <p>This is some content.</p>
 
     <img src="mavs.jpg" alt="Mavericks UTA" />
 
     <form>
-        <label for="firstName">First Name</label>
-        <input name="firstName" />
-        <br />
+        <div class="group">
+            <label for="firstName">First Name</label>
+            <input name="firstName" />
+        </div>
         <input placeholder="Last Name" />
 
-        <input type="checkbox" name="about" value="male" /> Male
-        <input type="checkbox" name="about" value="rich" /> Rich
-        <input type="checkbox" name="about" value="student" /> Student
-
-        <br />
+        <div class="group">
+            <input type="checkbox" name="about" value="male" /> Male
+            <input type="checkbox" name="about" value="rich" /> Rich
+            <input type="checkbox" name="about" value="student" /> Student
+        </div>
 
         <input type="radio" name="gender" value="male" />Male
         <input type="radio" name="gender" value="female" />Female
@@ -33,6 +64,9 @@
 
         <input type="submit" value="Submit" />
     </form>
+
+
+    <i class="fa fa-pencil" aria-hidden="true"></i>
 
     <ul>
         <li>This</li>
@@ -67,5 +101,6 @@
             <td>Homeless</td>
         </tr>
     </table>
+    </div>
 </body>
 </html>
