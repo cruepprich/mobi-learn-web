@@ -35,7 +35,7 @@
 </head>
 <body>
     <div class="container">
-    <h1 class="h1Color">This is a header</h1>
+    <h1 id="mainHeader" class="h1Color">This is a header</h1>
     <h6>This is the smallest healder</h6>
     <p>This is some content.</p>
 
@@ -102,5 +102,18 @@
         </tr>
     </table>
     </div>
+
+    <div id="insertionTest">
+
+    </div>
+
+    <script>
+        var test = [];
+        console.log('Before: ' + test);
+        test.push(1234);
+        console.log('After: ' + test);
+        test.splice(0, 1);
+        console.log('After Splice: ' + test);
+    </script>
 </body>
 </html>

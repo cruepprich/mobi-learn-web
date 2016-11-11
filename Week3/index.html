@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Todo List</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        .todoSection {
+            margin-top: 40px;
+        }
+
+        .mainHeader {
+            text-align: center;
+        }
+
+        .list-group-item {
+            transition: all 0.2s ease-in-out;
+        }
+
+        .list-group-item:hover {
+            background-color: #FF6666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <section class="row">
+            <h1 class="mainHeader">My todo list</h1>
+            <label for="todoInput">What do you need to do?</label> <br />
+            <form class="input-group" id="formTodo">
+                <input type="text" class="form-control" placeholder="What to do" id="todoInput">
+                <span class="input-group-btn">
+                    <input class="btn btn-primary" type="submit" value="Add" />
+                </span>
+            </form>
+        </section>
+
+        <section class="row todoSection">
+            <ol id="todoList" class="list-group">
+            </ol>
+        </section>
+    </div>
+
+    <script>
+        var todoArray = [];
+
+        function render() {
+            var parent = document.getElementById('todoList');
+
+            while(parent.firstChild) {
+                parent.removeChild(parent.firstChild);
+            }
+
+            for(var i in todoArray) {
+                todoArray[i].dataset.index = i;
+
+                parent.append(todoArray[i]);
+            }
+        }
+
+        function createElement(value) {
+            var newElement = document.createElement('li');
+
+            newElement.innerHTML = value;
+            newElement.dataset.index = todoArray.length;
+            newElement.className = 'list-group-item';
+
+            newElement.addEventListener('click', function(e) {
+                todoArray.splice(e.target.index, 1);
+
+                render();
+            });
+
+            return newElement;
+        }
+
+        document.getElementById('formTodo').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            var input = document.getElementById('todoInput');
+
+            if(input.value) {
+                var newInput = createElement(input.value);
+                todoArray.push(newInput);
+
+                document.getElementById('todoList').appendChild(newInput);
+
+                input.value = '';
+            }
+        });
+    </script>
+</body>
+</html>
