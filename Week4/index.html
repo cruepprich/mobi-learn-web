@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Todo List</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        .todoSection {
+            margin-top: 40px;
+        }
+
+        .mainHeader {
+            text-align: center;
+        }
+
+        .list-group-item {
+            transition: all 0.2s ease-in-out;
+        }
+
+        .list-group-item:hover {
+            background-color: #FF6666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <section class="row">
+            <h1 class="mainHeader">My todo list</h1>
+            <label for="todoInput">What do you need to do?</label> <br />
+            <form class="input-group" id="formTodo">
+                <input type="text" class="form-control" placeholder="What to do" id="todoInput">
+                <span class="input-group-btn">
+                    <input class="btn btn-primary" type="submit" value="Add" />
+                </span>
+            </form>
+        </section>
+
+        <section class="row todoSection">
+            <ol id="todoList" class="list-group">
+            </ol>
+        </section>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script>
+        var todoArray = [];
+
+        function onTodoElementDelete(e) {
+            todoArray.splice($(this).data('index'), 1);
+            render();
+        }
+
+        function render() {
+            var parent = $('#todoList');
+            parent.empty();
+
+            for(var i in todoArray) {
+                todoArray[i].data('index', i);
+                parent.append(todoArray[i]);
+                todoArray[i].click(onTodoElementDelete);
+            }
+        }
+
+        function createElement(value) {
+            var newElement = $('<li></li>');
+
+            newElement.text(value);
+            newElement.data('index', todoArray.length);
+            newElement.addClass('list-group-item');
+
+            newElement.click(onTodoElementDelete);
+
+            return newElement;
+        }
+
+        $('#formTodo').submit(function(e) {
+            e.preventDefault();
+
+            var input = $('#todoInput');
+
+            if(input.val()) {
+                var newInput = createElement(input.val());
+                todoArray.push(newInput);
+                $('#todoList').append(newInput);
+
+                input.val('');
+            }
+        });
+    </script>
+</body>
+</html>
