@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Todo List</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+    <h1>My todo list</h1>
+    <label for="todoInput">What do you need to do?</label> <br />
+    <!-- <input name="todoInput" /> -->
+    <div class="input-group">
+      <span class="input-group-addon" id="basic-addon1">New Todo:</span>
+      <input type="text" class="form-control" placeholder="The next thing you're just going to procrastinate on" aria-describedby="basic-addon1">
+    </div>
+
+    <button class="btn btn-info">Add item</button>
+
+    <ol id="todoList">
+      <li>test</li>
+    </ol>
+</div>
+
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyD19NyWA_DAOrC4jX2EWQmgm0gvSmCUS3s",
+      authDomain: "todolist-61c5e.firebaseapp.com",
+      databaseURL: "https://todolist-61c5e.firebaseio.com",
+      storageBucket: "todolist-61c5e.appspot.com",
+      messagingSenderId: "750517218844"
+    };
+    firebase.initializeApp(config);
+
+
+
+
+    // Read the data - once
+    // firebase.database().ref('/todos').once('value').then(function(snapshot) {
+    //   console.log(snapshot);
+    //   console.log(snapshot.val())
+    // });
+
+    // Read the data
+    var ref = firebase.database().ref('/todos');
+    ref.on('value', function(snapshot) {
+      // See what happend in console
+      console.log(snapshot.val());
+
+      // Add to list
+      updateData(snapshot.val());
+    });
+
+    function updateData(data) {
+      // Get access to <ul>
+      var list = $("#todoList");
+
+      // Get rid of last items
+      list.empty();
+
+      // Add new items
+      data.forEach(function(item) {
+        list.append("<li>" + item + "</li>")
+      });
+    }
+  </script>
+</body>
+</html>
